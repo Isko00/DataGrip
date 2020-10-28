@@ -44,7 +44,7 @@ SELECT * FROM Packs
     WHERE value > 180;
 
 -- 6
-SELECT DISTINCT (contents) * FROM Packs;
+SELECT DISTINCT (contents) FROM Packs;
 
 -- 7
 SELECT DISTINCT warehouse, count(warehouse) FROM Packs
