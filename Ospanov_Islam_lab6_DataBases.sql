@@ -74,9 +74,9 @@ SELECT first_name, last_name, e.department_id, l.city, l.state_province FROM emp
     INNER JOIN locations l USING (location_id);
 
 -- 7
-SELECT DISTINCT d.department_id FROM employees e
+SELECT department_id FROM employees e
     RIGHT JOIN departments d USING(department_id)
-    ORDER BY d.department_id;
+    ORDER BY department_id;
 
 -- 8
 SELECT first_name, last_name, COALESCE(e.department_id, 0) AS department_id,
