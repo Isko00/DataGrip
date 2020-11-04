@@ -78,6 +78,9 @@ SELECT department_id FROM employees e
     RIGHT JOIN departments d USING(department_id)
     ORDER BY department_id;
 
+SELECT department_id FROM employees e
+    RIGHT JOIN departments d USING(department_id)
+    WHERE e.department_id IS NULL;
 -- 8
 SELECT first_name, last_name, COALESCE(e.department_id, 0) AS department_id,
             COALESCE(d.department_name, 'no name') AS department_name FROM employees e
@@ -88,3 +91,14 @@ SELECT first_name, last_name FROM employees e
     INNER JOIN departments d USING (department_id)
     INNER JOIN locations l USING (location_id)
     WHERE l.city = 'Almaty';
+
+
+-- array functions
+SELECT ARRAY_LENGTH(ARRAY[1, 2, 3, 4], 1);
+
+SELECT ARRAY_PREPEND(1, ARRAY[2, 3, 4]);
+
+SELECT ARRAY_REMOVE(ARRAY[1, 2, 3, 4, 5], 5);
+
+SELECT ARRAY_REPLACE(ARRAY[1, 2, 5, 4], 5, 3);
+
