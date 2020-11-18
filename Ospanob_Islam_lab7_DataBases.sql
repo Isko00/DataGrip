@@ -60,9 +60,9 @@ SELECT * FROM salesmen;
 SELECT * FROM customers;
 SELECT * FROM orders;
 
-DROP TABLE salesmen;
-DROP TABLE customers;
 DROP TABLE orders;
+DROP TABLE customers;
+DROP TABLE salesmen;
 
 DROP DATABASE lab7;
 
