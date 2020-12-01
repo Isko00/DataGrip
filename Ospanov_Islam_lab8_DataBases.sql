@@ -4,14 +4,14 @@ CREATE TABLE departments
     AS SELECT id,
           10 * (3 + round(random() * 5)) AS department_id,
           round(random() * 1000) AS budget
-    FROM generate_Series(1,10000) id;
+    FROM generate_Series(1,100000) id;
 
 CREATE TABLE customers
     AS SELECT id,
           substr(md5(random()::text), 0, 7) AS name,
           substr(md5(random()::text), 0, 7) AS city,
           10 * (3 + round(random() * 5)) AS department_id
-    FROM generate_Series(1,10000) id;
+    FROM generate_Series(1,100000) id;
 
 SELECT * FROM customers;
 SELECT * FROM departments;
@@ -59,20 +59,14 @@ EXPLAIN ANALYSE SELECT * FROM customers
 DROP INDEX idx_customers_substr_name;
 
 -- 5
-CREATE INDEX idx_customers_department_id_hash
-    ON customers USING hash (department_id);
-
-CREATE INDEX idx_customers_id
-    ON customers (id);
-
-CREATE INDEX idx_departments_budget
-    ON departments (budget);
+CREATE INDEX idx_departments_department_id on departments USING HASH (department_id);
+CREATE INDEX idx_customers_department_id on customers USING HASH (department_id);
 
 EXPLAIN ANALYSE SELECT * FROM customers c
     JOIN departments d USING (department_id)
     WHERE c.id > 100 AND d.budget < 500;
 
-DROP INDEX idx_customers_id, idx_departments_budget, idx_customers_department_id_hash;
+DROP INDEX idx_departments_department_id, idx_customers_department_id;
 
 -- 6
 ALTER TABLE customers
@@ -99,7 +93,7 @@ DROP INDEX idx_customers_city_hash;
 CREATE UNIQUE INDEX idx_customers_id
     ON customers (id);
 
-EXPLAIN SELECT * FROM customers
+EXPLAIN ANALYSE SELECT * FROM customers
     WHERE id < 3007
           AND id > 2002;
 
