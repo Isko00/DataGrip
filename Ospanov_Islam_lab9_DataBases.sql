@@ -53,9 +53,9 @@ SELECT * FROM salesman;
 SELECT * FROM customers;
 SELECT * FROM orders;
 
-DROP TABLE orders;
-DROP TABLE customers;
-DROP TABLE salesman;
+DROP TABLE orders CASCADE;
+DROP TABLE customers CASCADE ;
+DROP TABLE salesman CASCADE ;
 
 DROP DATABASE lab9;
 
@@ -87,7 +87,7 @@ DROP VIEW v3;
 -- 6
 CREATE VIEW v4 AS
     SELECT count(salesman_id), city FROM salesman
-        WHERE city NOTNULL
+        WHERE city IS NOT NULL
         GROUP BY city;
 
 SELECT * FROM v4;
@@ -153,6 +153,7 @@ ALTER VIEW abc RENAME TO xyz;
 SELECT * FROM xyz;
 
 DROP VIEW abc;
+DROP VIEW xyz;
 
 -- 13
 CREATE VIEW v10 AS

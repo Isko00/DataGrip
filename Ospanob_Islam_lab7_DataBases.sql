@@ -67,8 +67,8 @@ DROP TABLE salesmen;
 DROP DATABASE lab7;
 
 -- 2
-SELECT ARRAY(SELECT s.name, c.cast_name, s.city FROM salesmen s
-    INNER JOIN customers c USING (city));
+SELECT s.name, c.cast_name, s.city FROM salesmen s
+    INNER JOIN customers c USING (city);
 
 -- 3
 SELECT o.ord_no, o.purch_amt, c.cast_name, c.city FROM orders o
